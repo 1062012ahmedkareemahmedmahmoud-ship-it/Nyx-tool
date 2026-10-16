@@ -1,0 +1,40 @@
+
+name: Build LXM APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - run: npm install -g cordova
+
+      - name: Create Android app
+        run: cordova create app com.lxm.tool LXM
+
+      - name: Copy project HTML
+        run: cp nyx_mapper-2.html app/www/index.html
+
+      - name: Build APK
+        run: |
+          cd app
+          cordova platform add android
+          cordova build android --debug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LXM-APK
+          path: app/platforms/android/app/build/outputs/apk/debug/*.apk
