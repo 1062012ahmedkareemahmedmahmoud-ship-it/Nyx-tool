@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10131b">
+<title>Nyx Mapper</title>
+<style>
+:root{color-scheme:dark;--bg:#10131b;--panel:#191e2a;--line:#2b3345;--txt:#f2f4fb;--muted:#a5aec2;--accent:#a78bfa;--good:#63d6a5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#25213d 0,#10131b 48%);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+main{max-width:620px;margin:auto;padding:22px 16px 42px}.top{display:flex;align-items:center;gap:12px;margin-bottom:20px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#a78bfa,#5eead4);display:grid;place-items:center;color:#141323;font-size:24px;font-weight:900}.sub{color:var(--muted);font-size:13px;margin-top:3px}h1{font-size:22px;margin:0}h2{font-size:17px;margin:0 0 12px}.panel{background:rgba(25,30,42,.94);border:1px solid var(--line);border-radius:20px;padding:17px;margin:14px 0;box-shadow:0 10px 30px #0002}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.pill{font-size:12px;padding:5px 9px;border-radius:999px;background:#30384a;color:#d9def0}.pill.on{background:#143b31;color:#8ff0c5}p{color:var(--muted);font-size:14px;line-height:1.6;margin:8px 0 12px}input,select{width:100%;border:1px solid #394257;background:#10141e;color:var(--txt);padding:13px;border-radius:12px;font:inherit;outline:none;margin:6px 0 10px}input:focus,select:focus{border-color:var(--accent)}button{border:0;border-radius:12px;padding:12px 15px;background:var(--accent);color:#171326;font-weight:750;font:inherit;cursor:pointer}button.secondary{background:#30384a;color:var(--txt)}button.full{width:100%}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.feature{padding:13px;border-radius:14px;background:#121722;border:1px solid var(--line)}.feature strong{display:block;font-size:14px}.feature span{font-size:12px;color:var(--muted)}.switch{accent-color:var(--accent);width:20px;height:20px}.hidden{display:none}.status{font-size:13px;margin-top:8px;min-height:20px}.ok{color:var(--good)}.err{color:#ff9eaa}.tiny{font-size:12px;color:var(--muted)}.keyrow{display:flex;gap:8px}.keyrow input{flex:1;min-width:0}.footer{text-align:center;color:#7f899f;font-size:12px;margin-top:20px}
+</style>
+</head>
+<body><main>
+<header class="top"><div class="logo">N</div><div><h1>Nyx Mapper</h1><div class="sub">Mouse • Keyboard • Profiles</div></div><span class="pill" id="planPill">FREE</span></header>
+<section class="panel">
+<div class="row"><h2>حالة البريميوم</h2><span class="pill" id="premiumState">غير مفعّل</span></div>
+<p>أدخل كود التفعيل الذي أنشأته في إعدادات المالك. هذا نموذج محلي للتجربة؛ التحقق المحلي ليس حماية إنتاجية ولا يثبت صلاحية الكود على سيرفر.</p>
+<input id="licenseInput" autocomplete="off" placeholder="اكتب كود Premium هنا">
+<button class="full" id="activateBtn">تفعيل Premium</button><div class="status" id="licenseStatus" role="status"></div>
+</section>
+<section class="panel"><h2>أدوات التحكم</h2><div class="grid">
+<div class="feature"><strong>تخصيص الأزرار</strong><span>تجربة واجهة تعيين المفاتيح</span></div>
+<div class="feature"><strong>بروفايلات</strong><span>حفظ إعدادات لكل لعبة</span></div>
+<div class="feature"><strong>ماكرو تجريبي</strong><span>تسلسل إجراءات داخل التطبيق</span></div>
+<div class="feature"><strong>إعدادات الحساسية</strong><span>حفظ القيم محليًا</span></div>
+</div><p>واجهة إدارة الإعدادات فقط؛ لا تتحكم تلقائيًا في PUBG من هذه الصفحة.</p></section>
+<section class="panel"><div class="row"><h2>إعدادات الماوس</h2><span class="pill">محلي</span></div>
+<label for="sensitivity">الحساسية: <b id="sensVal">50</b></label><input id="sensitivity" type="range" min="1" max="100" value="50" style="padding:0;accent-color:var(--accent)">
+<label for="profile">البروفايل</label><select id="profile"><option>ببجي التايوانية</option><option>تصويب عام</option><option>استكشاف</option></select>
+<label class="row" style="justify-content:flex-start;margin:12px 0"><input class="switch" type="checkbox" id="macroToggle"><span>تفعيل الماكرو التجريبي داخل التطبيق</span></label>
+<button class="secondary full" id="saveBtn">حفظ الإعدادات</button><div class="status" id="saveStatus"></div>
+</section>
+<section class="panel"><h2>إعداد كود Premium (للمالك)</h2><p>حدّد الكود الذي تريد استخدامه على هذا الجهاز. لا تضع أسرارًا أو أكواد مدفوعة حقيقية هنا.</p>
+<input id="ownerCode" autocomplete="off" placeholder="أنشئ كودك الخاص">
+<button class="secondary full" id="setCodeBtn">حفظ كود التفعيل المحلي</button><div class="status" id="ownerStatus"></div>
+<p class="tiny">تنبيه: أي شخص يملك ملف HTML يستطيع فحص الكود المحلي أو تعديله. للإصدار الحقيقي استخدم سيرفرًا للتحقق من التراخيص.</p>
+</section>
+<div class="footer">Nyx Mapper • prototype 0.1 • Android-friendly web app</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const KEY='nyx_mapper_demo_license', PREMIUM='nyx_mapper_demo_premium', SETTINGS='nyx_mapper_demo_settings';
+function renderPremium(){const active=localStorage.getItem(PREMIUM)==='yes';$('planPill').textContent=active?'PREMIUM':'FREE';$('premiumState').textContent=active?'مفعّل':'غير مفعّل';$('premiumState').classList.toggle('on',active)}
+$('activateBtn').addEventListener('click',()=>{const entered=$('licenseInput').value.trim();const saved=localStorage.getItem(KEY);if(saved && entered.toLowerCase()===saved.toLowerCase()){localStorage.setItem(PREMIUM,'yes');$('licenseStatus').textContent='تم التفعيل محليًا على هذا المتصفح.';$('licenseStatus').className='status ok'}else{$('licenseStatus').textContent='الكود غير صحيح أو لم يتم إنشاء كود بعد.';$('licenseStatus').className='status err'}renderPremium()});
+$('setCodeBtn').addEventListener('click',()=>{const code=$('ownerCode').value.trim();if(code.length<4){$('ownerStatus').textContent='اكتب كودًا من 4 أحرف على الأقل.';$('ownerStatus').className='status err';return}localStorage.setItem(KEY,code);$('ownerStatus').textContent='تم حفظ الكود على هذا الجهاز فقط.';$('ownerStatus').className='status ok'});
+$('sensitivity').addEventListener('input',()=> $('sensVal').textContent=$('sensitivity').value);
+$('saveBtn').addEventListener('click',()=>{const data={sensitivity:$('sensitivity').value,profile:$('profile').value,macro:$('macroToggle').checked};localStorage.setItem(SETTINGS,JSON.stringify(data));$('saveStatus').textContent='تم حفظ الإعدادات على هذا الجهاز.';$('saveStatus').className='status ok'});
+try{const s=JSON.parse(localStorage.getItem(SETTINGS)||'null');if(s){$('sensitivity').value=s.sensitivity;$('sensVal').textContent=s.sensitivity;$('profile').value=s.profile;$('macroToggle').checked=!!s.macro}}catch(e){}
+renderPremium();
+</script></body></html>
